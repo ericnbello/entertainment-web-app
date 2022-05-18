@@ -1,11 +1,11 @@
-import React, {useState} from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 // import HomeNav from "./icons/HomeNav";
 // import MovieNav from "./icons/MovieNav";
 // import SeriesNav from "./icons/SeriesNav";
 
 export default function Nav() {
-    const [value, setValue] = useState(0)
+    // const [value, setValue] = useState(0)
 
     return (
         <nav className="flex flex-col md:flex-row relative m-0 gap-y-6 justify-between bg-semiDarkBlue rounded-lg md:h-96 p-4 w-full md:w-14">

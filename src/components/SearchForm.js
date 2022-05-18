@@ -4,7 +4,8 @@ export default function SearchForm(props) {
     const [searchTerm, setSearchTerm] = useState('')
 
     const numTitlesFound = []
-    const searchResults = props.arr.filter((val)=>{
+
+    let searchResults = props.arr.filter((val)=>{
         if(searchTerm === ""){
             return "";
         }
@@ -12,6 +13,7 @@ export default function SearchForm(props) {
             numTitlesFound.push(val);
             return val;
         }
+        return numTitlesFound;
     })
 
     return (
