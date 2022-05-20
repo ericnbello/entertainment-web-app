@@ -1,25 +1,20 @@
-import React, {useState} from "react";
+import React from "react";
 import MovieBookmarks from "../components/MovieBookmarks";
 import SeriesBookmarks from "../components/SeriesBookmarks";
 import SearchForm from "../components/SearchForm";
-import media from "../../src/mediaData.json";
 
-export default function Bookmarks() {
-    const [searchTerm, setSearchTerm] = useState('')
-    const handleChange = event => setSearchTerm(event.target.value);
-
+export default function Bookmarks(props) {
     const bookmarkedMovies = []
     const bookmarkedSeries = []
 
-    for(var i=0; i<media.length; i++) {
-        if(media[i].category === "Movie" 
-            && media[i].isBookmarked === true) {
-            bookmarkedMovies.push(media[i])
-        }
-
-        if(media[i].category === "TV Series" 
-            && media[i].isBookmarked === true) {
-            bookmarkedSeries.push(media[i])
+    for(var i=0; i<props.arr.length; i++) {
+        if(props.arr[i].isBookmarked === true) {
+            if(props.arr[i].category === "Movie") {
+                bookmarkedMovies.push(props.arr[i])
+            }
+            if(props.arr[i].category === "TV Series") {
+                bookmarkedSeries.push(props.arr[i])
+            }
         }
     }
 
@@ -28,13 +23,13 @@ export default function Bookmarks() {
     return (
         <div className="bookmarks mx-auto">
             <SearchForm
-                searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm}
-                handleChange={handleChange}
+                searchTerm={props.searchTerm}
+                setSearchTerm={props.setSearchTerm}
+                handleChange={props.handleChange}
                 placeholderText='Search for bookmarked shows'
                 arr={bookmarks}
             />
-            <div className={(searchTerm==='' ? `block` : `hidden`)}>
+            <div className={(props.searchTerm==='' ? `block` : `hidden`)}>
                 <MovieBookmarks arr={bookmarkedMovies} />
                 <SeriesBookmarks arr={bookmarkedSeries} />
             </div>

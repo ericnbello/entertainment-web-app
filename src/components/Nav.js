@@ -9,7 +9,7 @@ export default function Nav() {
     const [value, setValue] = useState(0)
 
     return (
-        <nav className="flex flex-col lg:flex-row relative m-0 gap-y-6 justify-between bg-semiDarkBlue rounded-lg lg:h-[50rem] p-4 w-full lg:w-16">
+        <nav className="flex flex-col lg:flex-row relative m-0 gap-y-6 justify-between bg-semiDarkBlue rounded-lg lg:h-[35rem] p-4 w-full lg:w-16">
 			<div className="flex flex-row lg:flex-col gap-6 justify-between">
 					<div className="flex justify-center items-center">
 						<img className="h-6 w-6" src='../../assets/logo.svg' alt="logo" />
@@ -44,9 +44,9 @@ export default function Nav() {
 						</Link>
 					</div>
 				<div className="avatar flex justify-end items-center">
-					{/* <Link className="flex justify-center w-8 h-8" to="/account"> */}
+					<Link className="flex justify-center w-8 h-8" to="/account">
 						<img className="border-2 border-white rounded-full" src="../../assets/image-avatar.png" alt="user avatar"/>
-					{/* </Link> */}
+					</Link>
 				</div>
 			</div>
 		</nav>
