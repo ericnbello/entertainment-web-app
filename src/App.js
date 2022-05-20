@@ -1,10 +1,12 @@
 import * as React from "react";
 import { Routes, Route } from "react-router-dom";
 import "./index.css";
+import allTitles from "./mediaData.json";
 
 // Page components
 import Nav from './components/Nav';
-// import Footer from "./components/Footer";
+import Video from "./components/Video";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Movies from "./pages/Movies";
 import Series from "./pages/Series";
@@ -13,8 +15,8 @@ import Account from "./pages/Account";
 
 function App() {
   return (
-    <div className="bg-darkBlue text-white font-sans min-h-screen py-6">
-      <div className="flex flex-col md:flex-row max-w-7xl mx-auto">
+    <div className="bg-darkBlue text-white font-outfit py-6">
+      <div className="flex flex-col lg:flex-row max-w-7xl mx-auto min-h-screen">
         <Nav />
           <main className="px-6 lg:px-24 w-full">
             <Routes>
@@ -23,10 +25,24 @@ function App() {
               <Route path="/series" element ={<Series />} />
               <Route path="/bookmarks" element ={<Bookmarks />} />
               <Route path="/account" element ={<Account />} />
+
+              {allTitles.map((video) => {
+                return (
+                  <Route 
+                    path={video.title.replace(/\W+/g, '-').toLowerCase()} 
+                    element={
+                      <Video
+                        title={video.title} 
+                        image={video.thumbnail.regular.large}
+                      />
+                    } 
+                  />
+                )
+              })}
             </Routes>
           </main>
-        {/* <Footer /> */}
       </div>
+      <Footer />
     </div>
   );
 }

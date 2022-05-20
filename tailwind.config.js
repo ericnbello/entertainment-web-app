@@ -3,6 +3,9 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    fontFamily: {
+      'outfit': ['Outfit', 'sans-serif']
+    },
     extend: {
       colors: {
         'darkBlue': '#10141E',

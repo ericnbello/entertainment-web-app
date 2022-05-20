@@ -1,39 +1,52 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
-// import HomeNav from "./icons/HomeNav";
-// import MovieNav from "./icons/MovieNav";
-// import SeriesNav from "./icons/SeriesNav";
+import HomeNav from "./icons/HomeNav";
+import MovieNav from "./icons/MovieNav";
+import SeriesNav from "./icons/SeriesNav";
+import BookmarkNav from "./icons/BookmarkNav";
 
 export default function Nav() {
-    // const [value, setValue] = useState(0)
+    const [value, setValue] = useState(0)
 
     return (
-        <nav className="flex flex-col md:flex-row relative m-0 gap-y-6 justify-between bg-semiDarkBlue rounded-lg md:h-96 p-4 w-full md:w-14">
-			<div className="flex flex-row md:flex-col gap-6 justify-between">
-				<div className="flex justify-center">
-					<img className="h-6 w-6" src='../../assets/logo.svg' alt="logo" />
-				</div>
-				<div className="flex flex-row md:flex-col gap-4 justify-center">
-					<Link className="flex justify-center hover:fill-white" to="/">
-                        <img className="h-5 w-5" src='../../assets/icon-nav-home.svg' alt="home navigation icon" />
-					</Link>
-				
-					<Link className="flex justify-center" to="/movies">
-                        <img className="h-5 w-5" src='../../assets/icon-nav-movies.svg' alt="movies navigation icon" />
-					</Link>
+        <nav className="flex flex-col lg:flex-row relative m-0 gap-y-6 justify-between bg-semiDarkBlue rounded-lg lg:h-[50rem] p-4 w-full lg:w-16">
+			<div className="flex flex-row lg:flex-col gap-6 justify-between">
+					<div className="flex justify-center items-center">
+						<img className="h-6 w-6" src='../../assets/logo.svg' alt="logo" />
+					</div>
+					<div className="tabs flex flex-row lg:flex-col gap-4 justify-center items-center lg:h-full lg:justify-start">
+						<Link 
+							className={value===0 ? `flex justify-center fill-white hover:fill-red` : `flex justify-center fill-[#5A698F] hover:fill-red`} to="/">
+							<button onClick={() => {setValue(0)}}>
+								<HomeNav />
+							</button>
+						</Link>
+					
+						<Link
+							className={(value===1 ? `flex justify-center fill-white hover:fill-red` : `flex justify-center fill-[#5A698F] hover:fill-red`)} to="/movies">
+							<button onClick={() => {setValue(1)}}>
+								<MovieNav />
+							</button>
+						</Link>
 
-					<Link className="flex justify-center" to="/series">
-                        <img className="h-5 w-5" src='../../assets/icon-nav-tv-series.svg' alt="tv series navigation icon" />
-					</Link>
+						<Link
+							className={(value===2 ? `flex justify-center fill-white hover:fill-red` : `flex justify-center fill-[#5A698F] hover:fill-red`)} to="/series">
+							<button onClick={() => {setValue(2)}}>
+								<SeriesNav />
+							</button>
+						</Link>
 
-					<Link className="flex justify-center" to="/bookmarks">
-						<img className="h-5 w-5" src='../../assets/icon-nav-bookmark.svg' alt="bookmarks navigation icon" />
-					</Link>
-				</div>
-				<div className="flex justify-end">
-					<Link className="flex justify-center" to="/account">
-						<img className="h-6 w-6" src="../../assets/image-avatar.png" alt="user avatar"/>
-					</Link>
+						<Link
+							className={(value===3 ? `flex justify-center fill-white hover:fill-red` : `flex justify-center fill-[#5A698F] hover:fill-red`)} to="/bookmarks">
+							<button onClick={() => {setValue(3)}}>
+								<BookmarkNav />
+							</button>
+						</Link>
+					</div>
+				<div className="avatar flex justify-end items-center">
+					{/* <Link className="flex justify-center w-8 h-8" to="/account"> */}
+						<img className="border-2 border-white rounded-full" src="../../assets/image-avatar.png" alt="user avatar"/>
+					{/* </Link> */}
 				</div>
 			</div>
 		</nav>
