@@ -1,6 +1,6 @@
 # Entertainment web app solution
 
-This is a solution to the [Entertainment web app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/entertainment-web-app-J-UhgAW1X). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
+While this is a solution to the [Entertainment web app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/entertainment-web-app-J-UhgAW1X) challenge and Frontend Mentor challenges help you improve your coding skills by building realistic projects, I decided to add extra functionality to create a full stack web application using Firebase.
 
 ## Table of contents
 
@@ -24,6 +24,7 @@ Users should be able to:
 - Navigate between Home, Movies, TV Series, and Bookmarked Shows pages
 - Add/Remove bookmarks from all movies and TV series
 - Search for relevant shows on all pages
+- Login as a user to access video content pages
 
 ### Screenshot
 
@@ -32,7 +33,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [github.com/ericnbello/entertainment-web-app](https://github.com/ericnbello/entertainment-web-app)
-- Live Site URL: [entertainment-web-app-ericnbello.netlify.app/](https://entertainment-web-app-ericnbello.netlify.app/)
+- Live Site URL: [streaming-web-app.firebaseapp.com/](https://streaming-web-app.firebaseapp.com/)
 
 ## My process
 
@@ -46,10 +47,12 @@ Users should be able to:
 - [React](https://reactjs.org/) - JS library
 - [Tailwind](https://tailwindcss.com/) - CSS utility framework
 - [React Router 6](https://reactrouter.com/)
+- [Google Firebase](https://firebase.google.com/) - Fully managed backend infrastrucutre
 
 ### Useful resources
 
 - [React Router 6](https://reactrouter.com/docs/en/v6/getting-started/tutorial) - This helped me become familiar with new features found in version 6. It's very thorough and I will continue to use it going forward.
+- [Firebase Documentation](https://firebase.google.com/docs/reference/js/auth) - Detailed documentation regarding Firebase authentication methods, making it simple to add login functionality to webpages.
 
 ## Author
 
