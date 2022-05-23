@@ -16,7 +16,7 @@ export default function Movies(props) {
             <SearchForm
                 searchTerm={props.searchTerm}
                 setSearchTerm={props.setSearchTerm}
-                handleChange={props.handleChange}
+                handleSearch={props.handleSearch}
                 placeholderText='Search for movies'
                 arr={movies}
             />

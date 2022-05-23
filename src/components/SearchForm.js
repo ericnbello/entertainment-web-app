@@ -28,7 +28,7 @@ export default function SearchForm(props) {
                     style={{color: 'white'}}
                     type="text" 
                     placeholder={props.placeholderText}  
-                    onChange={props.handleChange}
+                    onChange={props.handleSearch}
                     required
                 />
                 <div className={props.searchTerm==="" ? `hidden` : `flex`}>

@@ -16,7 +16,7 @@ export default function Series(props) {
             <SearchForm
                 searchTerm={props.searchTerm}
                 setSearchTerm={props.setSearchTerm}
-                handleChange={props.handleChange}
+                handleSearch={props.handleSearch}
                 placeholderText='Search for TV series'
                 arr={series}
             />

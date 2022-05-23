@@ -5,7 +5,7 @@ import MovieNav from "./icons/MovieNav";
 import SeriesNav from "./icons/SeriesNav";
 import BookmarkNav from "./icons/BookmarkNav";
 
-export default function Nav() {
+export default function Nav({loggedIn}) {
     const [value, setValue] = useState(0)
 
     return (
@@ -44,7 +44,7 @@ export default function Nav() {
 						</Link>
 					</div>
 				<div className="avatar flex justify-end items-center">
-					<Link className="flex justify-center w-8 h-8" to="/account">
+					<Link className="flex justify-center w-8 h-8" to={(loggedIn===true ? "/dashboard" : "/login")}>
 						<img className="border-2 border-white rounded-full" src="../../assets/image-avatar.png" alt="user avatar"/>
 					</Link>
 				</div>

@@ -25,7 +25,7 @@ export default function Bookmarks(props) {
             <SearchForm
                 searchTerm={props.searchTerm}
                 setSearchTerm={props.setSearchTerm}
-                handleChange={props.handleChange}
+                handleSearch={props.handleSearch}
                 placeholderText='Search for bookmarked shows'
                 arr={bookmarks}
             />
