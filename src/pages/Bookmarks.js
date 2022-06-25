@@ -30,6 +30,8 @@ export default function Bookmarks(props) {
                 arr={bookmarks}
             />
             <div className={(props.searchTerm==='' ? `block` : `hidden`)}>
+                <h2 className="text-2xl text-white py-4">Bookmarks</h2>
+
                 <MovieBookmarks arr={bookmarkedMovies} />
                 <SeriesBookmarks arr={bookmarkedSeries} />
             </div>

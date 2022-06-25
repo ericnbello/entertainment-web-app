@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchForm from "../components/SearchForm";
 import Grid from "../components/Grid";
+import Row from "../components/Row";
+import requests from "../requests";
 
 export default function Series(props) {
     const series = []
@@ -21,8 +23,11 @@ export default function Series(props) {
                 arr={series}
             />
             <div className={(props.searchTerm==='' ? `block` : `hidden`)}>
-                <h2 className="text-xl text-white py-4">TV Series</h2>
-                <Grid arr={series} />
+                <h2 className="text-2xl text-white py-4">TV Series</h2>
+                <Row title="Top Rated" url={requests.fetchTopRatedSeries} />
+                <Row title="Comedy" url={requests.fetchComedySeries} />
+
+                {/* <Grid arr={series} /> */}
             </div>
         </div>
     )

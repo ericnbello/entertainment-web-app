@@ -7,6 +7,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./index.css";
 import allTitles from "./mediaData.json";
+import requests from './requests';
+import allMedia from "./allMedia.json"
 
 // Components
 import Nav from './components/Nav';
@@ -18,6 +20,7 @@ import Series from "./pages/Series";
 import Bookmarks from "./pages/Bookmarks";
 import Dashboard from "./pages/Dashboard";
 import AccountForm from "./components/AccountForm";
+import Row from "./components/Row";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -53,6 +56,7 @@ function App() {
   const firebaseConfig = {
     apiKey: "AIzaSyB9GzLY5EVFNvLsxHfq0q-rWeGRywXBi1Y",
     authDomain: "streaming-web-app.firebaseapp.com",
+    databaseURL: "https://streaming-web-app-default-rtdb.firebaseio.com/",
     projectId: "streaming-web-app",
     storageBucket: "streaming-web-app.appspot.com",
     messagingSenderId: "877009414204",
@@ -112,15 +116,15 @@ function App() {
 
   return (
     <div className="bg-darkBlue text-white font-outfit py-6">
-      <div className="flex flex-col lg:flex-row max-w-7xl mx-auto min-h-screen">
+      <div className="flex flex-col lg:flex-row max-w-7xl xl:max-w-[150rem] mx-auto min-h-screen">
         <Nav loggedIn={isLoggedIn} />
           <main className="px-6 lg:px-24 w-full">
             <Routes>
 
               {/** Create category pages and pass props to each */}
-              {navigationTabs.map((tab) => {
+              {navigationTabs.map((tab, idx) => {
                 return (
-                  <Route path={tab.path} element={<tab.name arr={allTitles} searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleSearch={handleSearch}/>} 
+                  <Route key={idx} path={tab.path} element={<tab.name arr={allTitles} searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleSearch={handleSearch}/>} 
                   />
                 )
               })}
@@ -150,9 +154,10 @@ function App() {
                       element={<Dashboard />} />
                 
               {/** Create a page for each video title */}
-              {allTitles.map((video) => {
+              {allTitles.map((video, idx) => {
                 return (
                   <Route 
+                    key={idx}
                     path={video.title.replace(/\W+/g, '-').toLowerCase()} 
                     element={
                       <Video
@@ -167,6 +172,28 @@ function App() {
                   />
                 )
               })}
+
+              {/** Create a page for each video title */}
+              {/* {allMedia.map((video, idx) => {
+                return (
+                  <Route 
+                    key={idx}
+                    path={`../${video.title == null ? (video.name.replace(/\W+/g, '-').toLowerCase()) : (video.title.replace(/\W+/g, '-').toLowerCase())}`} 
+                    element={
+                      <Video
+                        id={video.id}
+                        title={video.title}
+                        category={video.category}
+                        year={video.year}
+                        rating={video.rating}
+                        link={`../${video.title == null ? (video.name.replace(/\W+/g, '-').toLowerCase()) : (video.title.replace(/\W+/g, '-').toLowerCase())}`} 
+                        image={video.thumbnail.regular.large}
+                      />
+                    } 
+                  />
+                )
+              })} */}
+
             </Routes>
             <ToastContainer autoClose={5000}  />
           </main>
