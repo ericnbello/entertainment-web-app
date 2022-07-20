@@ -1,19 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "./Grid";
+import axios from '../axios';
+import requests from "../requests";
+const API_KEY = process.env.REACT_APP_TMDb_API_KEY
 
 export default function SearchForm(props) {
-    const titlesFound = []
+    const [titlesFound, setTitlesFound] = useState([])
+    // const responseArr = []
+    const titlesFoundArr = []
 
-    let searchResults = props.arr.filter((val)=>{
+    useEffect(() => {
+        axios.get(props.fetchSearchResultsUrl)
+        .then((response) => {
+            setTitlesFound(response.data)
+            console.log(titlesFound)
+            titlesFoundArr.push(response.data)
+            console.log(titlesFoundArr)
+        })
+    }, [])
+
+    let searchResults = titlesFoundArr.filter((val)=>{
         if(props.searchTerm === ""){
             return "";
         }
-        else if(val.title.toLowerCase().includes(props.searchTerm.toLowerCase())){
-            titlesFound.push(val);
+        else if(val.title == null ? val.name : (val.title != null ? val.title : val.original_name).toLowerCase().includes(props.searchTerm.toLowerCase())){
+            titlesFoundArr.push(val);
             return val;
         }
         return false;
     })
+    console.log(searchResults)
 
     return (
         <div className="flex py-6 gap-x-2 w-full">
@@ -33,7 +49,7 @@ export default function SearchForm(props) {
                 />
                 <div className={props.searchTerm==="" ? `hidden` : `flex`}>
                     <p className="py-4">
-                        Found {titlesFound.length} results for '{props.searchTerm}'
+                        Found {titlesFoundArr.length} results for '{props.searchTerm}'
                     </p>
                 </div>   
                 

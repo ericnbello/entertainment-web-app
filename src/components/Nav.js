@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import HomeNav from "./icons/HomeNav";
 import MovieNav from "./icons/MovieNav";
 import SeriesNav from "./icons/SeriesNav";
-import BookmarkNav from "./icons/BookmarkNav";
+// import BookmarkNav from "./icons/BookmarkNav";
+import SearchIcon from "./icons/SearchIcon";
 
 export default function Nav({loggedIn}) {
     const [value, setValue] = useState(0)
 
     return (
-        <nav className="flex flex-col lg:flex-row relative m-0 gap-y-6 justify-between bg-semiDarkBlue rounded-lg lg:h-[35rem] p-4 w-full lg:w-16">
+        <nav className="flex flex-col lg:flex-row relative m-0 gap-y-6 justify-between bg-semiDarkBlue rounded-lg lg:h-[50rem] p-4 w-full lg:w-16">
 			<div className="flex flex-row lg:flex-col gap-6 justify-between">
 					<div className="flex justify-center items-center">
 						<img className="h-6 w-6" src='../../assets/logo.svg' alt="logo" />
@@ -36,16 +37,24 @@ export default function Nav({loggedIn}) {
 							</button>
 						</Link>
 
-						<Link
+						{/* <Link
 							className={(value===3 ? `flex justify-center fill-white hover:fill-red` : `flex justify-center fill-[#5A698F] hover:fill-red`)} to="/bookmarks">
 							<button onClick={() => {setValue(3)}}>
 								<BookmarkNav />
 							</button>
+						</Link> */}
+
+						<Link
+							className={(value===3 ? `flex justify-center fill-white hover:fill-red` : `flex justify-center fill-[#5A698F] hover:fill-red`)} to="/search">
+							<button onClick={() => {setValue(4)}}>
+								<SearchIcon />
+							</button>
 						</Link>
+
 					</div>
 				<div className="avatar flex justify-end items-center">
 					<Link className="flex justify-center w-8 h-8" to={(loggedIn===true ? "/dashboard" : "/login")}>
-						<img className="border-2 border-white rounded-full" src="../../assets/image-avatar.png" alt="user avatar"/>
+						<img className="fill-white" src="../../assets/image-avatar.svg" alt="user avatar"/>
 					</Link>
 				</div>
 			</div>

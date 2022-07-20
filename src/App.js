@@ -6,7 +6,7 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } f
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./index.css";
-import allTitles from "./mediaData.json";
+import axios from "./axios";
 
 // Components
 import Nav from './components/Nav';
@@ -18,8 +18,11 @@ import Series from "./pages/Series";
 import Bookmarks from "./pages/Bookmarks";
 import Dashboard from "./pages/Dashboard";
 import AccountForm from "./components/AccountForm";
+import Search from "./pages/Search";
 
 function App() {
+  const API_KEY = process.env.REACT_APP_TMDb_API_KEY
+
   const [searchTerm, setSearchTerm] = useState('');
   const handleSearch = e => setSearchTerm(e.target.value);
 
@@ -47,12 +50,17 @@ function App() {
     {
       name: Bookmarks,
       path: '/bookmarks'
+    },
+    {
+      name: Search,
+      path: '/search'
     }
   ]
 
   const firebaseConfig = {
     apiKey: "AIzaSyB9GzLY5EVFNvLsxHfq0q-rWeGRywXBi1Y",
     authDomain: "streaming-web-app.firebaseapp.com",
+    databaseURL: "https://streaming-web-app-default-rtdb.firebaseio.com/",
     projectId: "streaming-web-app",
     storageBucket: "streaming-web-app.appspot.com",
     messagingSenderId: "877009414204",
@@ -62,6 +70,20 @@ function App() {
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+  const firebaseDbUrl = "https://streaming-web-app-default-rtdb.firebaseio.com/";
+
+  const [allMedia, setAllMedia] = useState([])
+  const allMediaArr = []
+
+  useEffect(() => {
+    axios.get(firebaseDbUrl + "media.json").then((response) => {
+      setAllMedia(response.data)
+      // console.log(allMedia)
+      allMediaArr.push(response.data)
+      // console.log(allMediaArr)
+    })
+    // eslint-disable-next-line
+  }, [allMedia])
 
   const navigate = useNavigate();
 
@@ -108,19 +130,22 @@ function App() {
     if (authToken) {
       navigate('/dashboard')
     }
+    // eslint-disable-next-line
   }, [])
 
   return (
     <div className="bg-darkBlue text-white font-outfit py-6">
-      <div className="flex flex-col lg:flex-row max-w-7xl mx-auto min-h-screen">
+      <div className="flex flex-col lg:flex-row max-w-7xl xl:max-w-[150rem] mx-auto min-h-screen">
         <Nav loggedIn={isLoggedIn} />
           <main className="px-6 lg:px-24 w-full">
             <Routes>
 
               {/** Create category pages and pass props to each */}
-              {navigationTabs.map((tab) => {
+              {navigationTabs.map((tab, idx) => {
                 return (
-                  <Route path={tab.path} element={<tab.name arr={allTitles} searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleSearch={handleSearch}/>} 
+                  <Route key={idx} path={tab.path} element={<tab.name 
+                    // searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleSearch={handleSearch}
+                    />} 
                   />
                 )
               })}
@@ -150,23 +175,26 @@ function App() {
                       element={<Dashboard />} />
                 
               {/** Create a page for each video title */}
-              {allTitles.map((video) => {
+              {Object.keys(allMedia).map((key, index) => {
                 return (
-                  <Route 
-                    path={video.title.replace(/\W+/g, '-').toLowerCase()} 
+                  <Route
+                    key={index}
+                    path={allMedia[key].title.replace(/\W+/g, '-').toLowerCase()}
                     element={
                       <Video
-                        title={video.title}
-                        category={video.category}
-                        year={video.year}
-                        rating={video.rating}
-                        link={video.title.replace(/\W+/g, '-').toLowerCase()} 
-                        image={video.thumbnail.regular.large}
+                        id={allMedia[key].id}
+                        title={allMedia[key].title}
+                        category={allMedia[key].media_type}
+                        year={allMedia[key].release_year}
+                        overview={allMedia[key].overview}
+                        link={allMedia[key].title.replace(/\W+/g, '-').toLowerCase()} 
+                        image={`https://image.tmdb.org/t/p/w185${allMedia[key].poster_path}`}
                       />
                     } 
                   />
                 )
               })}
+
             </Routes>
             <ToastContainer autoClose={5000}  />
           </main>
