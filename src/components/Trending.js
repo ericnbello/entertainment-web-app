@@ -16,20 +16,20 @@ export default function Trending() {
     const [trendingList, setTrendingList] = useState([])
     const trendingListArr = []
     
-    useEffect(() => {
-        // axios.get(`https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.REACT_APP_TMDb_API_KEY}`)
-        axios.get(`https://api.themoviedb.org/3/trending/all/day?api_key=0c7b0d279c441dec486b8bf4ee392304&language=en-US`)
-          .then((response) => {
-            setTrendingList(response.data.results);
-            trendingListArr.push(response.data.results)
-            console.log(trendingList)
-            console.log(trendingListArr)
-          })
-          // .catch((error) => {
-          //   setError(error.error)
-          //   console.log(error)
-          // })
-      }, []);
+    // useEffect(() => {
+    //     // axios.get(`https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.REACT_APP_TMDb_API_KEY}`)
+    //     axios.get(`https://api.themoviedb.org/3/trending/all/day?api_key=0c7b0d279c441dec486b8bf4ee392304&language=en-US`)
+    //       .then((response) => {
+    //         setTrendingList(response.data.results);
+    //         trendingListArr.push(response.data.results)
+    //         console.log(trendingList)
+    //         console.log(trendingListArr)
+    //       })
+    //       // .catch((error) => {
+    //       //   setError(error.error)
+    //       //   console.log(error)
+    //       // })
+    //   }, []);
     //   if (!trendingList) return null;
 
     return (

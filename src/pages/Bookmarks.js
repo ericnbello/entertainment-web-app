@@ -7,34 +7,34 @@ export default function Bookmarks(props) {
     const bookmarkedMovies = []
     const bookmarkedSeries = []
 
-    for(var i=0; i<props.arr.length; i++) {
-        if(props.arr[i].isBookmarked === true) {
-            if(props.arr[i].category === "Movie") {
-                bookmarkedMovies.push(props.arr[i])
-            }
-            if(props.arr[i].category === "TV Series") {
-                bookmarkedSeries.push(props.arr[i])
-            }
-        }
-    }
+    // for(var i=0; i<props.arr.length; i++) {
+    //     if(props.arr[i].isBookmarked === true) {
+    //         if(props.arr[i].category === "Movie") {
+    //             bookmarkedMovies.push(props.arr[i])
+    //         }
+    //         if(props.arr[i].category === "TV Series") {
+    //             bookmarkedSeries.push(props.arr[i])
+    //         }
+    //     }
+    // }
 
     const bookmarks = bookmarkedMovies.concat(bookmarkedSeries)
 
     return (
         <div className="bookmarks mx-auto">
-            <SearchForm
+            {/* <SearchForm
                 searchTerm={props.searchTerm}
                 setSearchTerm={props.setSearchTerm}
                 handleSearch={props.handleSearch}
                 placeholderText='Search for bookmarked shows'
                 arr={bookmarks}
-            />
-            <div className={(props.searchTerm==='' ? `block` : `hidden`)}>
+            /> */}
+            {/* <div className={(props.searchTerm==='' ? `block` : `hidden`)}> */}
                 <h2 className="text-2xl text-white py-4">Bookmarks</h2>
 
                 <MovieBookmarks arr={bookmarkedMovies} />
                 <SeriesBookmarks arr={bookmarkedSeries} />
-            </div>
+            {/* </div> */}
         </div>
     )
 }

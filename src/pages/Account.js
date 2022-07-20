@@ -73,6 +73,7 @@ export default function Account(){
                 <img src="/assets/logo.svg" alt="logo"/>
             </div>
             <form className={(loginForm===true ? `flex flex-col bg-semiDarkBlue h-1/3 w-3/4 md:w-1/2 lg:w-1/3 rounded-xl p-6 gap-8` : `hidden`)}>
+                <h1 className="flex justify-start text-xl text-white pt-4">Login to get started</h1>
                 <h2 className="flex justify-start text-xl text-white pt-4">Login</h2>
                 <input className="bg-transparent border-b-[1px] border-white pl-2 py-2" type="email" placeholder="Email address" 
                 // onChange={handleEmailClick}
@@ -97,6 +98,7 @@ export default function Account(){
             </form>
 
             <form id="signup" className={(loginForm===false ? `flex flex-col bg-semiDarkBlue h-1/3 w-3/4 md:w-1/2 lg:w-1/3 rounded-xl p-6 gap-8` : `hidden`)} onSubmit={createUserWithEmailAndPassword(auth, email, password)}>
+                <h1 className="flex justify-start text-xl text-white pt-4">Create an account to get started</h1>
                 <h2 className="flex justify-start text-xl text-white pt-4">Sign Up</h2>
                 <input className="bg-transparent border-b-[1px] border-white pl-2 py-2" type="email" placeholder="Email address" name="email" onChange={handleCreateEmail} required/>
                 <input className="bg-transparent border-b-[1px] border-white pl-2 py-2" type="password" placeholder="Password" name="password" onChange={handleCreatePassword} required/>

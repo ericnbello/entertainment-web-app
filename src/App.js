@@ -6,9 +6,7 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } f
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./index.css";
-import allTitles from "./mediaData.json";
-import requests from './requests';
-import allMedia from "./allMedia.json"
+import axios from "./axios";
 
 // Components
 import Nav from './components/Nav';
@@ -20,9 +18,11 @@ import Series from "./pages/Series";
 import Bookmarks from "./pages/Bookmarks";
 import Dashboard from "./pages/Dashboard";
 import AccountForm from "./components/AccountForm";
-import Row from "./components/Row";
+import Search from "./pages/Search";
 
 function App() {
+  const API_KEY = process.env.REACT_APP_TMDb_API_KEY
+
   const [searchTerm, setSearchTerm] = useState('');
   const handleSearch = e => setSearchTerm(e.target.value);
 
@@ -50,6 +50,10 @@ function App() {
     {
       name: Bookmarks,
       path: '/bookmarks'
+    },
+    {
+      name: Search,
+      path: '/search'
     }
   ]
 
@@ -66,6 +70,20 @@ function App() {
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+  const firebaseDbUrl = "https://streaming-web-app-default-rtdb.firebaseio.com/";
+
+  const [allMedia, setAllMedia] = useState([])
+  const allMediaArr = []
+
+  useEffect(() => {
+    axios.get(firebaseDbUrl + "media.json").then((response) => {
+      setAllMedia(response.data)
+      // console.log(allMedia)
+      allMediaArr.push(response.data)
+      // console.log(allMediaArr)
+    })
+    // eslint-disable-next-line
+  }, [allMedia])
 
   const navigate = useNavigate();
 
@@ -112,6 +130,7 @@ function App() {
     if (authToken) {
       navigate('/dashboard')
     }
+    // eslint-disable-next-line
   }, [])
 
   return (
@@ -124,7 +143,9 @@ function App() {
               {/** Create category pages and pass props to each */}
               {navigationTabs.map((tab, idx) => {
                 return (
-                  <Route key={idx} path={tab.path} element={<tab.name arr={allTitles} searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleSearch={handleSearch}/>} 
+                  <Route key={idx} path={tab.path} element={<tab.name 
+                    // searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleSearch={handleSearch}
+                    />} 
                   />
                 )
               })}
@@ -154,45 +175,25 @@ function App() {
                       element={<Dashboard />} />
                 
               {/** Create a page for each video title */}
-              {allTitles.map((video, idx) => {
+              {Object.keys(allMedia).map((key, index) => {
                 return (
-                  <Route 
-                    key={idx}
-                    path={video.title.replace(/\W+/g, '-').toLowerCase()} 
+                  <Route
+                    key={index}
+                    path={allMedia[key].title.replace(/\W+/g, '-').toLowerCase()}
                     element={
                       <Video
-                        title={video.title}
-                        category={video.category}
-                        year={video.year}
-                        rating={video.rating}
-                        link={video.title.replace(/\W+/g, '-').toLowerCase()} 
-                        image={video.thumbnail.regular.large}
+                        id={allMedia[key].id}
+                        title={allMedia[key].title}
+                        category={allMedia[key].media_type}
+                        year={allMedia[key].release_year}
+                        overview={allMedia[key].overview}
+                        link={allMedia[key].title.replace(/\W+/g, '-').toLowerCase()} 
+                        image={`https://image.tmdb.org/t/p/w185${allMedia[key].poster_path}`}
                       />
                     } 
                   />
                 )
               })}
-
-              {/** Create a page for each video title */}
-              {/* {allMedia.map((video, idx) => {
-                return (
-                  <Route 
-                    key={idx}
-                    path={`../${video.title == null ? (video.name.replace(/\W+/g, '-').toLowerCase()) : (video.title.replace(/\W+/g, '-').toLowerCase())}`} 
-                    element={
-                      <Video
-                        id={video.id}
-                        title={video.title}
-                        category={video.category}
-                        year={video.year}
-                        rating={video.rating}
-                        link={`../${video.title == null ? (video.name.replace(/\W+/g, '-').toLowerCase()) : (video.title.replace(/\W+/g, '-').toLowerCase())}`} 
-                        image={video.thumbnail.regular.large}
-                      />
-                    } 
-                  />
-                )
-              })} */}
 
             </Routes>
             <ToastContainer autoClose={5000}  />
