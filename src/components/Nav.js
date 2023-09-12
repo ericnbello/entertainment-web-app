@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import HomeNav from "./icons/HomeNav";
 import MovieNav from "./icons/MovieNav";
 import SeriesNav from "./icons/SeriesNav";
-// import BookmarkNav from "./icons/BookmarkNav";
-import SearchIcon from "./icons/SearchIcon";
+import BookmarkNav from "./icons/BookmarkNav";
+import SearchIcon from "../components/icons/SearchIcon";
+import AnalyticsNav from "./icons/AnalyticsNav";
 
 export default function Nav({loggedIn}) {
     const [value, setValue] = useState(0)
@@ -37,17 +38,24 @@ export default function Nav({loggedIn}) {
 							</button>
 						</Link>
 
-						{/* <Link
+						<Link
 							className={(value===3 ? `flex justify-center fill-white hover:fill-red` : `flex justify-center fill-[#5A698F] hover:fill-red`)} to="/bookmarks">
 							<button onClick={() => {setValue(3)}}>
 								<BookmarkNav />
 							</button>
-						</Link> */}
+						</Link>
 
 						<Link
-							className={(value===3 ? `flex justify-center fill-white hover:fill-red` : `flex justify-center fill-[#5A698F] hover:fill-red`)} to="/search">
-							<button onClick={() => {setValue(4)}}>
+							className={(value===4 ? `flex justify-center fill-white hover:fill-red` : `flex justify-center fill-[#5A698F] hover:fill-red`)} to="/search">
+							<button onClick={() => {setValue(5)}}>
 								<SearchIcon />
+							</button>
+						</Link>
+
+						<Link
+							className={(value===5 ? `flex justify-center fill-white hover:fill-red` : `flex justify-center fill-[#5A698F] hover:fill-red`)} to="/analytics">
+							<button onClick={() => {setValue(5)}}>
+								<AnalyticsNav />
 							</button>
 						</Link>
 

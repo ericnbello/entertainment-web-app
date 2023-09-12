@@ -22,10 +22,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.0.1",
-    "stream-browserify": "^3.0.0",
     "tailwind-scrollbar-hide": "^1.1.7",
-    "url": "^0.11.0",
-    "util": "^0.12.4",
     "web-vitals": "^2.1.0",
     "webpack": "^5.73.0",
     "yup": "^0.32.11"

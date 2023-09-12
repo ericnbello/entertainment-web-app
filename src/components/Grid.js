@@ -51,6 +51,10 @@ export default function Grid(props) {
                             {video.media_type}</p> */}
                             <p className="text-lg font-medium">{video.title == null ? video.name : video.title}</p>
                         </div>
+                        <p className="flex flex-wrap pt-1 text-xs md:text-sm font-light">{video.year} • 
+                            <span className="px-2 pt-1"><img src={video.category==="Movie" ? "/assets/icon-category-movie.svg" : "/assets/icon-category-tv.svg"} alt="icon"/></span>
+                            {video.category} • {video.rating}</p>
+                        <p className="text-lg font-medium">{video.title}</p>
                     </div>
                 )
             })}

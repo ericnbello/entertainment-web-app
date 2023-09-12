@@ -18,7 +18,7 @@ import Series from "./pages/Series";
 import Bookmarks from "./pages/Bookmarks";
 import Dashboard from "./pages/Dashboard";
 import AccountForm from "./components/AccountForm";
-import Search from "./pages/Search";
+import Analytics from "./pages/Analytics";
 
 function App() {
   const API_KEY = process.env.REACT_APP_TMDb_API_KEY
@@ -52,8 +52,8 @@ function App() {
       path: '/bookmarks'
     },
     {
-      name: Search,
-      path: '/search'
+      name: Analytics,
+      path: '/analytics'
     }
   ]
 
