@@ -3,8 +3,8 @@ import {Link} from "react-router-dom";
 import BookmarkIcon from "./icons/BookmarkIcon";
 import PlayIcon from "./icons/PlayIcon";
 import axios from "../axios";
-// import app from '../firebase-config'
-// import database from '../firebase-config'
+import app from '../firebase-config'
+import database from '../firebase-config'
 import { getDatabase, ref, set } from "firebase/database";
 
 export default function Row ({title, url}) {
@@ -44,7 +44,6 @@ export default function Row ({title, url}) {
             <h2 className="text-xl text-white py-4">{title}</h2>
             <div className="grid grid-rows-1 grid-flow-col w-full overflow-x-auto gap-4 pb-10 scrollbar-hide">
                 {media.map((video, idx) => {
-
                     writeMediaData(
                         video.id, 
                         video.id, 

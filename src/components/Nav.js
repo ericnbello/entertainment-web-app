@@ -38,26 +38,26 @@ export default function Nav({loggedIn}) {
 							</button>
 						</Link>
 
-						<Link
+						{/* <Link
 							className={(value===3 ? `flex justify-center fill-white hover:fill-red` : `flex justify-center fill-[#5A698F] hover:fill-red`)} to="/bookmarks">
 							<button onClick={() => {setValue(3)}}>
 								<BookmarkNav />
 							</button>
-						</Link>
+						</Link> */}
 
 						<Link
-							className={(value===4 ? `flex justify-center fill-white hover:fill-red` : `flex justify-center fill-[#5A698F] hover:fill-red`)} to="/search">
-							<button onClick={() => {setValue(5)}}>
+							className={(value===3 ? `flex justify-center fill-white hover:fill-red` : `flex justify-center fill-[#5A698F] hover:fill-red`)} to="/search">
+							<button onClick={() => {setValue(3)}}>
 								<SearchIcon />
 							</button>
 						</Link>
 
-						<Link
-							className={(value===5 ? `flex justify-center fill-white hover:fill-red` : `flex justify-center fill-[#5A698F] hover:fill-red`)} to="/analytics">
-							<button onClick={() => {setValue(5)}}>
+						{/* <Link
+							className={(value===4 ? `flex justify-center fill-white hover:fill-red` : `flex justify-center fill-[#5A698F] hover:fill-red`)} to="/analytics">
+							<button onClick={() => {setValue(4)}}>
 								<AnalyticsNav />
 							</button>
-						</Link>
+						</Link> */}
 
 					</div>
 				<div className="avatar flex justify-end items-center">

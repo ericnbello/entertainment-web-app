@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@observablehq/runtime": "^5.9.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -11,6 +12,7 @@
     "axios": "^0.27.2",
     "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",
+    "d3": "^7.8.5",
     "firebase": "^9.8.1",
     "firebase-admin": "^11.0.0",
     "graceful-fs": "^4.2.10",
@@ -22,6 +24,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.0.1",
+    "revenue-by-music-format-1973-2018": "https://api.observablehq.com/d/7babbae81635eb14@642.tgz",
     "tailwind-scrollbar-hide": "^1.1.7",
     "web-vitals": "^2.1.0",
     "webpack": "^5.73.0",

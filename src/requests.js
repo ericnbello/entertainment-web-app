@@ -1,4 +1,3 @@
-// const API_KEY = "0c7b0d279c441dec486b8bf4ee392304";
 const API_KEY = process.env.REACT_APP_TMDb_API_KEY
 
 const requests = {

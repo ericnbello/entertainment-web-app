@@ -15,6 +15,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Movies from "./pages/Movies";
 import Series from "./pages/Series";
+import Search from "./pages/Search";
 import Bookmarks from "./pages/Bookmarks";
 import Dashboard from "./pages/Dashboard";
 import AccountForm from "./components/AccountForm";
@@ -46,6 +47,10 @@ function App() {
     {
       name: Series,
       path: '/series'
+    },
+    {
+      name: Search,
+      path: '/search'
     },
     {
       name: Bookmarks,
