@@ -6,16 +6,14 @@ name: Deploy to Firebase Hosting on merge
   push:
     branches:
       - main
-jobs:
-  create_env_file:
-    steps:
-      - run: touch .env
-      - run: echo API_KEY=${{ secrets.REACT_APP_TMDb_API_KEY }} >> .env
-      - run: cat .env
+jobs:    
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: touch .env
+      - run: echo API_KEY=${{ secrets.REACT_APP_TMDb_API_KEY }} >> .env
+      - run: cat .env
       - run: npm install
       - run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
