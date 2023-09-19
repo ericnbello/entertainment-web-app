@@ -5,7 +5,7 @@ export default function SeriesBookmarks(props) {
     return (
         <div className="bookmarked-series mx-auto">
             <h2 className="text-xl text-white py-4">Bookmarked TV Series</h2>
-            <Grid arr={props.arr} />
+            {/* <Grid arr={props.arr} /> */}
         </div>
     )
 }

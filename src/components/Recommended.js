@@ -14,7 +14,7 @@ export default function Recommended() {
     return (
         <div className="recommended mx-auto">
             <h2 className="text-xl text-white py-4">Recommended for you</h2>
-            <Grid arr={recommended} />
+            {/* <Grid arr={recommended} /> */}
         </div>
     )
 }

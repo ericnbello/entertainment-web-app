@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import BookmarkIcon from "../components/icons/BookmarkIcon";
 import PlayIcon from "../components/icons/PlayIcon";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, remove } from "firebase/database";
 
 export default function Grid(props) {
 
@@ -15,12 +15,24 @@ export default function Grid(props) {
         overview: description,
         media_type: category,
         poster_path: imageUrl
-    });
-}
+        });
+    }
+
+    function deleteMediaData(result, mediaId, year, name, description, category, imageUrl) {
+        const db = getDatabase();
+        remove(ref(db, 'media/' + result), {
+            id: mediaId,
+            release_year: year,
+            title: name,
+            overview: description,
+            media_type: category,
+            poster_path: imageUrl
+        });
+    }
+
     return (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 pb-10">
             {props.arr.map((video, idx) => {
-
                  writeMediaData(
                     video.id, 
                     video.id, 
@@ -57,7 +69,19 @@ export default function Grid(props) {
                         {/* <p className="text-lg font-medium">{video.title}</p> */}
                     </div>
                 )
-            })}
+            })};
+
+            {/* {props.arr.map((video, idx) => {
+                deleteMediaData(
+                    video.id, 
+                    video.id, 
+                    ((video.first_air_date == null ? video.release_date : video.first_air_date).substring(0,4)),
+                    (video.title == null ? video.name : (video.title != null ? video.title : video.original_name)),
+                    video.overview, 
+                    (video.media_type == null ? '' : video.media_type == "movie" ? ((video.media_type).charAt(0).toUpperCase() + (video.media_type).slice(1)) : (video.media_type).toUpperCase()),
+                    video.poster_path)
+                })}; */}
+
         </div>
     )
 }
