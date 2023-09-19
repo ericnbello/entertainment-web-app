@@ -18,17 +18,17 @@ export default function Grid(props) {
         });
     }
 
-    function deleteMediaData(result, mediaId, year, name, description, category, imageUrl) {
-        const db = getDatabase();
-        remove(ref(db, 'media/' + result), {
-            id: mediaId,
-            release_year: year,
-            title: name,
-            overview: description,
-            media_type: category,
-            poster_path: imageUrl
-        });
-    }
+    // function deleteMediaData(result, mediaId, year, name, description, category, imageUrl) {
+    //     const db = getDatabase();
+    //     remove(ref(db, 'media/' + result), {
+    //         id: mediaId,
+    //         release_year: year,
+    //         title: name,
+    //         overview: description,
+    //         media_type: category,
+    //         poster_path: imageUrl
+    //     });
+    // }
 
     return (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 pb-10">
