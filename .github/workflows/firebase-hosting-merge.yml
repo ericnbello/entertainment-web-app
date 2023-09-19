@@ -12,6 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: touch .env
+      - run: echo CI=false >> .env
+      - run: echo DISABLE_ESLINT_PLUGIN=true >> .env
       - run: echo API_KEY=${{ secrets.REACT_APP_TMDb_API_KEY }} >> .env
       - run: cat .env
       - run: npm install
