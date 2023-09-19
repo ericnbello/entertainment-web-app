@@ -22,7 +22,7 @@ import AccountForm from "./components/AccountForm";
 import Analytics from "./pages/Analytics";
 
 function App() {
-  const API_KEY = process.env.REACT_APP_TMDb_API_KEY
+  const API_KEY = process.env.REACT_APP_TMDB_API_KEY
 
   const [searchTerm, setSearchTerm] = useState('');
   const handleSearch = e => setSearchTerm(e.target.value);
