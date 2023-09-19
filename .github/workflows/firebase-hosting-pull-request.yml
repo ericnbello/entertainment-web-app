@@ -9,9 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: rm -rf package-lock.json npm-shrinkwrap.json node_modules
-      - run: npm cache clean --force
-      - run: npm cache verify
       - run: npm install
       - run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
