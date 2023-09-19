@@ -11711,11 +11711,6 @@
   "resolved" "https://registry.npmjs.org/reusify/-/reusify-1.0.4.tgz"
   "version" "1.0.4"
 
-"revenue-by-music-format-1973-2018@https://api.observablehq.com/d/7babbae81635eb14@642.tgz":
-  "integrity" "sha512-8mxxEsDtlkpFxgERzo9WRbgrhFUuzXAzlBG0J7d/m4RwtmmLZrsi3wcbNgiwCmjkNPw65HjUs6HY5YqhxK8zBg=="
-  "resolved" "https://api.observablehq.com/d/7babbae81635eb14@642.tgz"
-  "version" "642.0.0"
-
 "rimraf@^3.0.0", "rimraf@^3.0.2":
   "integrity" "sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA=="
   "resolved" "https://registry.npmjs.org/rimraf/-/rimraf-3.0.2.tgz"
