@@ -11,11 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: touch .env
-      - run: echo CI=false >> .env
-      - run: echo DISABLE_ESLINT_PLUGIN=true >> .env
-      - run: echo API_KEY=${{ secrets.REACT_APP_TMDB_API_KEY }} >> .env
-      - run: cat .env
+      - run: cd functions
+      - run: npm install && npm build
+      - run: cd ..
       - run: npm install
       - run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
