@@ -1,3 +1,8 @@
-exports["myfunc"] = runWith({secrets: ["REACT_APP_TMDB_API_KEY"]}).https.onCall(() => {
+const functions = require("firebase-functions");
+const { initializeApp } = require("firebase-admin/app");
+// const { getFirestore } = require("firebase-admin/firestore")
+initializeApp()
+
+exports["useSecrets"] = runWith({secrets: ["REACT_APP_TMDB_API_KEY"]}).https.onCall(() => {
     process.env.REACT_APP_TMDB_API_KEY
   })  

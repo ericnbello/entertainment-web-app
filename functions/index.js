@@ -1,7 +1,6 @@
 const functions = require("firebase-functions");
 const { initializeApp } = require("firebase-admin/app");
 // const { getFirestore } = require("firebase-admin/firestore")
-
 initializeApp()
 
 // // Create and Deploy Your First Cloud Functions
@@ -27,7 +26,3 @@ exports.deleteOldItems = functions.database.ref('/media/')
     return ref.update(updates);
   });
 });
-
-exports["myfunc"] = runWith({secrets: ["REACT_APP_TMDB_API_KEY"]}).https.onCall(() => {
-  process.env.REACT_APP_TMDB_API_KEY
-})  
