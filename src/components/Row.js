@@ -191,7 +191,7 @@ export default function Row({ title, url }) {
       overview: description,
       media_type: category,
       poster_path: imageUrl,
-      timestamp: serverTimestamp(), // Use serverTimestamp to get the server time
+      // timestamp: serverTimestamp(), // Use serverTimestamp to get the server time
     });
   }
 
@@ -214,7 +214,7 @@ export default function Row({ title, url }) {
             : video.media_type === "tv" || video.media_type === "show"
             ? "TV"
             : "",
-        video.poster_path
+        video.poster_path,
       );
     });
   }, [media]);

@@ -2,9 +2,15 @@ const functions = require("firebase-functions");
 const { initializeApp } = require("firebase-admin/app");
 initializeApp();
 
+exports.addTimestamp = functions.database.ref('/media/{id}')
+  .onCreate((snapshot, context) => {
+    const timestamp = admin.database.ServerValue.TIMESTAMP;
+    return snapshot.ref.child('timestamp').set(timestamp);
+  });
+  
 exports.deleteOldItems = functions.database.ref('/media/{id}')
 .onWrite((change, context) => {
-    const cutoff = Date.now() - (2 * 60 * 60 * 1000); // 2 hours in milliseconds
+    const cutoff = Date.now() - (2 * 60 * 60); // 2 hours in milliseconds
 
     // If a new item is created or an existing item is updated
     if (change.after.exists() && (!change.before.exists() || change.after.val().timestamp !== change.before.val().timestamp)) {
@@ -32,9 +38,9 @@ exports.deleteOldItems = functions.database.ref('/media/{id}')
 
 // Schedule function to delete old items even if no new entries are added
 exports.scheduledFunction = functions.pubsub.schedule('every 24 hours').timeZone('America/New_York').onRun((context) => {
-    const cutoff = Date.now() - (2 * 60 * 60 * 1000); // 2 hours in milliseconds
+    const cutoff = Date.now() - (2 * 60 * 60); // 2 hours in milliseconds
 
-    const ref = admin.database().ref('/media');
+    const ref = admin.database().ref('/media/{id}');
 
     // Query for old items
     const oldItemsQuery = ref.orderByChild('timestamp').endAt(cutoff);
