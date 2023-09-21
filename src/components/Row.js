@@ -192,7 +192,7 @@ export default function Row({ title, url }) {
       overview: description,
       media_type: category,
       poster_path: imageUrl,
-      timestamp: timestamp
+      timestamp: serverTimestamp(),
     });
   }
 
