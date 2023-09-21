@@ -1,7 +1,7 @@
 const functions = require("firebase-functions");
-// const { initializeApp } = require("firebase-admin/app");
-const admin = require("firebase-admin/app");
-admin.initializeApp();
+const { initializeApp } = require("firebase-admin/app");
+// const admin = require("firebase-admin/app");
+initializeApp();
 
 exports.deleteOldItems = functions.database.ref('/media/{id}')
 .onWrite((change, context) => {
