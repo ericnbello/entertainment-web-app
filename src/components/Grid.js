@@ -136,7 +136,7 @@ export default function Grid(props) {
       overview: description,
       media_type: category,
       poster_path: imageUrl,
-      "timestamp": "timestamp"    
+      timestamp: {".sv": "timestamp"} // Set a server timestamp
     });
   }
 
