@@ -27,10 +27,11 @@ export default function Row ({title, url}) {
           // eslint-disable-next-line
       }, []);
 
-    function writeMediaData(result, mediaId, year, name, description, category, imageUrl) {
+    function writeMediaData(result, timestamp, mediaId, year, name, description, category, imageUrl) {
         const db = getDatabase();
         set(ref(db, 'media/' + result), {
             id: mediaId,
+            timestamp: timestamp,
             release_year: year,
             title: name,
             overview: description,
@@ -47,6 +48,7 @@ export default function Row ({title, url}) {
                     writeMediaData(
                         video.id, 
                         video.id, 
+                        Date.now(),
                         ((video.first_air_date == null ? video.release_date : video.first_air_date).substring(0,4)),
                         (video.title == null ? video.name : (video.title != null ? video.title : video.original_name)), 
                         video.overview,

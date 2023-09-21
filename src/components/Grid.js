@@ -3,13 +3,15 @@ import { Link } from "react-router-dom";
 import BookmarkIcon from "../components/icons/BookmarkIcon";
 import PlayIcon from "../components/icons/PlayIcon";
 import { getDatabase, ref, set, remove } from "firebase/database";
+// import { Timestamp } from "@google-cloud/firestore";
 
 export default function Grid(props) {
 
-    function writeMediaData(result, mediaId, year, name, description, category, imageUrl) {
+    function writeMediaData(result, timestamp, mediaId, year, name, description, category, imageUrl) {
     const db = getDatabase();
     set(ref(db, 'media/' + result), {
         id: mediaId,
+        timestamp: timestamp,
         release_year: year,
         title: name,
         overview: description,
@@ -36,6 +38,7 @@ export default function Grid(props) {
                  writeMediaData(
                     video.id, 
                     video.id, 
+                    Date.now(),
                     ((video.first_air_date == null ? video.release_date : video.first_air_date).substring(0,4)),
                     (video.title == null ? video.name : (video.title != null ? video.title : video.original_name)),
                     video.overview, 
