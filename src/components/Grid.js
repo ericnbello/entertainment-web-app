@@ -6,7 +6,7 @@ import { getDatabase, ref, set, remove } from "firebase/database";
 // import { Timestamp } from "@google-cloud/firestore";
 
 export default function Grid(props) {
-    var timestamp = Date.now();
+    var time = Date.now();
 
     function writeMediaData(result, mediaId, year, name, description, category, imageUrl) {
     const db = getDatabase();
@@ -17,7 +17,7 @@ export default function Grid(props) {
         overview: description,
         media_type: category,
         poster_path: imageUrl,
-        timestamp: timestamp,
+        timestamp: time,
         });
     }
 
@@ -44,6 +44,7 @@ export default function Grid(props) {
                     video.overview, 
                     (video.media_type == null ? '' : video.media_type == "movie" ? ((video.media_type).charAt(0).toUpperCase() + (video.media_type).slice(1)) : (video.media_type).toUpperCase()),
                     video.poster_path,
+                    timestamp
                 )
                 
                 return (                    

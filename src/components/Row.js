@@ -8,7 +8,7 @@ import database from '../firebase-config'
 import { getDatabase, ref, set } from "firebase/database";
 
 export default function Row ({title, url}) {
-    var timestamp = Date.now();
+    var time = Date.now();
     const [media, setMedia] = useState([])
     // const [error, setError] = useState()
     const mediaArr = []    
@@ -37,7 +37,7 @@ export default function Row ({title, url}) {
             overview: description,
             media_type: category,
             poster_path: imageUrl,
-            timestamp: timestamp,
+            timestamp: time,
         });
     }
       
@@ -54,6 +54,7 @@ export default function Row ({title, url}) {
                         video.overview,
                         (video.media_type == null ? '' : video.media_type == "movie" ? ((video.media_type).charAt(0).toUpperCase() + (video.media_type).slice(1)) : (video.media_type).toUpperCase()),
                         video.poster_path,
+                        timestamp
                     )
                     
                     return (                    
