@@ -6,6 +6,7 @@ import { getDatabase, ref, set, remove } from "firebase/database";
 // import { Timestamp } from "@google-cloud/firestore";
 
 export default function Grid(props) {
+    var timestamp = Date.now();
 
     function writeMediaData(result, mediaId, year, name, description, category, imageUrl) {
     const db = getDatabase();
@@ -16,7 +17,7 @@ export default function Grid(props) {
         overview: description,
         media_type: category,
         poster_path: imageUrl,
-        timestamp: Date.now(),
+        timestamp: timestamp,
         });
     }
 

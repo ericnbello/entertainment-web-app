@@ -8,6 +8,7 @@ import database from '../firebase-config'
 import { getDatabase, ref, set } from "firebase/database";
 
 export default function Row ({title, url}) {
+    var timestamp = Date.now();
     const [media, setMedia] = useState([])
     // const [error, setError] = useState()
     const mediaArr = []    
@@ -36,7 +37,7 @@ export default function Row ({title, url}) {
             overview: description,
             media_type: category,
             poster_path: imageUrl,
-            timestamp: Date.now(),
+            timestamp: timestamp,
         });
     }
       

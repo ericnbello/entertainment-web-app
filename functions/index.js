@@ -15,7 +15,7 @@ exports.deleteOldItems = functions.database.ref('/media/')
   var ref = change.after.ref.parent; // reference to the items
   var now = Date.now();
   var cutoff = now - (2 * 60 * 60 * 1000);
-  var oldItemsQuery = ref.orderByChild('timestamp').endAt(cutoff);
+  var oldItemsQuery = ref.orderByChild('/{id}/timestamp').endAt(cutoff);
   return oldItemsQuery.once('value', function(snapshot) {
     // create a map with all children that need to be removed
     var updates = {};
