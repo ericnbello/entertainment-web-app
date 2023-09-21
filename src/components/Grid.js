@@ -96,6 +96,8 @@ import PlayIcon from "../components/icons/PlayIcon";
 import { getDatabase, ref, set, serverTimestamp } from "firebase/database";
 
 export default function Grid(props) {
+  const timestamp = Date.now();
+
   useEffect(() => {
     props.arr.forEach((video) => {
       writeMediaData(
@@ -136,7 +138,7 @@ export default function Grid(props) {
       overview: description,
       media_type: category,
       poster_path: imageUrl,
-      timestamp: serverTimestamp(),
+      timestamp: timestamp,
     });
   }
 

@@ -162,6 +162,7 @@ import axios from "../axios";
 import { getDatabase, ref, set, serverTimestamp } from "firebase/database";
 
 export default function Row({ title, url }) {
+  const timestamp = Date.now();
   const [media, setMedia] = useState([]);
 
   useEffect(() => {
@@ -191,7 +192,7 @@ export default function Row({ title, url }) {
       overview: description,
       media_type: category,
       poster_path: imageUrl,
-      timestamp: serverTimestamp(), // Use serverTimestamp to get the server time
+      timestamp: timestamp
     });
   }
 
