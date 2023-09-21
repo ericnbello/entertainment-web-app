@@ -191,7 +191,7 @@ export default function Row({ title, url }) {
       overview: description,
       media_type: category,
       poster_path: imageUrl,
-      // timestamp: serverTimestamp(), // Use serverTimestamp to get the server time
+      timestamp: serverTimestamp(), // Use serverTimestamp to get the server time
     });
   }
 
