@@ -1,62 +1,31 @@
 const functions = require("firebase-functions");
 const { initializeApp } = require("firebase-admin/app");
-// const { getFirestore } = require("firebase-admin/firestore")
-initializeApp()
-
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
-// exports.deleteOldItems = functions.database.ref('/media/{id}/')
-// .onWrite((change, context) => {
-//   if (!)
-//   var ref = change.after.ref.parent; // reference to the items
-//   var now = Date.now();
-//   var cutoff = now - (2 * 60 * 60 * 1000);
-//   var oldItemsQuery = ref.orderByChild('/{id}/timestamp').endAt(cutoff);
-//   return oldItemsQuery.once('value', function(snapshot) {
-//     // create a map with all children that need to be removed
-//     var updates = {};
-//     snapshot.forEach(function(child) {
-//       updates[child.key] = 0;
-//     });
-//     // execute all updates in one go and return the result to end the function
-//     return ref.update(updates);
-//   });
-// });
+initializeApp();
 
 exports.deleteOldItems = functions.database.ref('/media/{id}')
 .onWrite((change, context) => {
-  // Only proceed if data is being created (not updated)
-  // if (!change.after.exists() || change.before.exists()) {
-  //   return null;
-  // }
+    const cutoff = Date.now() - (1 * 60 * 60 * 1000); // 1 hour in milliseconds
 
-  const ref = change.after.ref; // reference to the item
-  const now = Date.now();
-  const cutoff = now - (2 * 60 * 60);
+    // If a new item is created or an existing item is updated
+    if (change.after.exists() && (!change.before.exists() || change.after.val().timestamp !== change.before.val().timestamp)) {
+        return null; // Do nothing, let the new entry stay
+    }
 
-  // Create a reference to the parent node
-  const parentRef = ref.parent;
+    // Otherwise, it's a delete or an unchanged entry
+    const ref = change.after.ref; // reference to the item
 
-  // Query for old items
-  const oldItemsQuery = parentRef.orderByChild('timestamp').endAt(cutoff);
+    // Query for old items
+    const oldItemsQuery = ref.parent.orderByChild('timestamp').endAt(cutoff);
 
-  return oldItemsQuery.once('value').then(snapshot => {
-    // Create a map with all children that need to be removed
-    const updates = {};
+    return oldItemsQuery.once('value').then(snapshot => {
+        const updates = {};
 
-    snapshot.forEach(child => {
-      // Check if the child is older than the cutoff
-      if (child.val().timestamp <= cutoff) {
-        updates[child.key] = null; // Setting value to null deletes the item
-      }
+        snapshot.forEach(child => {
+            if (child.val().timestamp <= cutoff) {
+                updates[child.key] = null;
+            }
+        });
+
+        return ref.parent.update(updates);
     });
-
-    // Execute all updates in one go and return the result to end the function
-    return parentRef.update(updates);
-  });
 });
