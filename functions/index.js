@@ -8,12 +8,12 @@ exports.deleteOldItems = functions.database.ref('/media/{id}')
     .onWrite((change, context) => {
         const cutoff = Date.now() - (2 * 60 * 60 * 10); // 2 hours in milliseconds
 
-        if (change.after.exists() && (!change.before.exists() || change.after.val().timestamp !== change.before.val().timestamp)) {
+        if (change.after.exists() && (!change.before.exists() || change.after.val().createdAt !== change.before.val().createdAt)) {
             return null;
         }
 
         const ref = change.after.ref;
-        const oldItemsQuery = ref.parent.orderByChild('timestamp').endAt(cutoff);
+        const oldItemsQuery = ref.parent.orderByChild('createdAt').endAt(cutoff);
 
         return oldItemsQuery.once('value').then(snapshot => {
             const updates = {};
@@ -31,7 +31,7 @@ exports.deleteOldItems = functions.database.ref('/media/{id}')
 exports.scheduledFunction = functions.pubsub.schedule('every 24 hours').timeZone('America/New_York').onRun((context) => {
     const cutoff = Date.now() - (2 * 60 * 60 * 10);
 
-    const ref = admin.database().ref('/media/{id}');
+    const ref = database().ref('/media/{id}');
     const oldItemsQuery = ref.orderByChild('createdAt').endAt(cutoff);
 
     return oldItemsQuery.once('value').then(snapshot => {
@@ -56,6 +56,6 @@ exports.scheduledFunction = functions.pubsub.schedule('every 24 hours').timeZone
 // })
 exports.addTimestamp = functions.database.ref('/media/{id}')
     .onCreate((snapshot, context) => {
-        const timestamp = admin.database.ServerValue.TIMESTAMP;
+        const timestamp = database.ServerValue.TIMESTAMP;
         return snapshot.ref.child('createdAt').set(timestamp);
     });
